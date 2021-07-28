@@ -59,6 +59,11 @@
       <div class="mr-3 mr-md-0">
         <%= formatted_gas(@block.gas_used) %>
         (<%= formatted_gas(Decimal.to_integer(@block.gas_used) / Decimal.to_integer(@block.gas_limit), format: "#.#%") %>)
+        <%= if Decimal.to_integer(@block.gas_limit) > 0 do %>
+          (<%= formatted_gas(Decimal.to_integer(@block.gas_used) / Decimal.to_integer(@block.gas_limit), format: "#.#%") %>)
+        <% else %>
+          <%= gettext " NaN% " %>
+        <% end %>
         <%= gettext "Gas Used" %>
       </div>
       <!-- Progress bar -->
