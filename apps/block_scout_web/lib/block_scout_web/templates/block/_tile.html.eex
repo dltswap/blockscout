@@ -67,8 +67,13 @@
       </div>
       <!-- Progress bar -->
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: <%= formatted_gas(Decimal.to_integer(@block.gas_used) / Decimal.to_integer(@block.gas_limit), format: "#.#%") %>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-        </div>
+        <%= if Decimal.to_integer(@block.gas_limit) > 0 do %>
+          <div class="progress-bar" role="progressbar" style="width: <%= formatted_gas(Decimal.to_integer(@block.gas_used) / Decimal.to_integer(@block.gas_limit), format: "#.#%") %>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+          </div>
+        <% else %>
+          <div class="progress-bar" role="progressbar" style="width: <%= gettext "NaN%" %>;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
